@@ -144,14 +144,4 @@
 </div>
 @endsection
 
-{{-- @foreach($permissions_modules as $key=>$page)
-            <tr>
-                <td>
-                    {{__(ucwords($key))}}
-                <td>
-                    @foreach($page as $index=>$p)
-                        <input class="lists" type="checkbox" value="{{$index.' '.$key}}" name="permissions[]" @if(isset($role) && in_array($index.' '.$key,optional($role->getPermissionNames())->toArray())) checked @endif> {{__($p)}}
-                    @endforeach
-                </td>
-            </tr>
-        @endforeach --}}
+

@@ -70,19 +70,7 @@
                                         <img src="{{ $user->image_path}}" style="width: 100px" class="image_thumbnail image-preview" alt="">
                                     </div>
 
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="password-vertical">@lang('site.password')</label>
-                                            <input type="password" id="password-vertical" class="form-control" name="password" placeholder="Password">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="password-vertical">@lang('site.password_confirmation')</label>
-                                            <input type="password" id="password-vertical" class="form-control" name="password_confirmation" placeholder="Password">
-                                        </div>
-                                    </div>
+                                    
 
                                     <div class="col-12">
                                             <div class="table-responsive border rounded px-1 tile" id="tile-1">
@@ -92,7 +80,7 @@
                                                 <table class="table table-borderless">
                                                     <thead>
                                                         <tr>
-                                                            <th>Module</th>
+                                                            <th>Modules</th>
                                                             <th>@lang('site.create')</th>
                                                             <th>@lang('site.read')</th>
                                                             <th>@lang('site.update')</th>
@@ -101,17 +89,16 @@
                                                     </thead>
                                                     @php
                                                         $models = ['users', 'categories', 'products', 'clients', 'orders'];
+                                                        $maps = ['create', 'read', 'update', 'delete'];
                                                     @endphp
                                                     <tbody>
                                                         @foreach ($models as $index => $model)
                                                         <tr>
                                                                 <td>{{$model}}</td>
 
-                                                                @foreach ($permissions as $permission)
+                                                                @foreach ($maps as $map)
                                                                 <td>
-
-                                                                    <input class="lists" type="checkbox" value="{{$permission->id}}" name="permissions[]">
-
+                                                                    <input class="lists" type="checkbox"  name="permissions[]" {{ $user->hasPermission($map . '_' . $model) ? 'checked' : '' }} value="{{ $map . '_' . $model }}">
                                                                 </td>
                                                                 @endforeach
 

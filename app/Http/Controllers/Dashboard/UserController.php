@@ -34,7 +34,7 @@ class UserController extends Controller
 
                 return $query->where('first_name', 'like', '%' . $request->search . '%')
                 ->orWhere('last_name', 'like', '%' . $request->search . '%');
-            
+
 
         });
 
@@ -112,15 +112,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        // dd($request->all());
         $request->validate([
 
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => ['required', Rule::unique('users')->ignore($user->id)],
-            'image' => 'required',
+            'image' => 'image',
             'permissions' => 'required|min:1',
-            'password' => 'required|confirmed',
         ]);
+
+
 
         if($request->image)
         {
@@ -138,7 +140,6 @@ class UserController extends Controller
 
             $request_data['image'] = $request->image->hashName();
         }
-
         $request_data = $request->except(['permissions', 'image']);
         $user->update($request_data);
         $user->syncPermissions($request->permissions);
