@@ -22,12 +22,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('dashboard_files/css/bootstrap-extended.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('dashboard_files/css/colors.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('dashboard_files/css/components.css')}}">
-    <!-- <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css"> -->
+
 
     <!-- BEGIN: Page CSS-->
-    <!-- <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css"> -->
+
     <link rel="stylesheet" type="text/css" href="{{asset('dashboard_files/css/authentication.css')}}">
     <!-- END: Page CSS-->
 
@@ -67,31 +65,24 @@
                                         <div class="card-content">
                                             <div class="card-body pt-1">
                                                 <form method="POST" action="{{ route('login') }}">
-                                                    @csrf
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('post') }}
+                                                    @include('partials._errors')
 
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input type="text" class="form-control" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus id="user-name" placeholder="E-mail" required>
+                                                        <input type="text" class="form-control" name="email" value="{{ old('email') }}" autocomplete="email" autofocus id="user-name" placeholder="E-mail" required>
 
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
-                                                        @error('email')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
                                                         <label for="user-name">{{ __('E-Mail Address') }}</label>
 
                                                     </fieldset>
 
 
                                                     <fieldset class="form-label-group position-relative has-icon-left">
-                                                        <input type="password" class="form-control" id="user-password"  @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-                                                        @error('password')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                        <input type="password" class="form-control" id="user-password" name="password" required autocomplete="current-password" placeholder="Password">
+
                                                         <div class="form-control-position">
                                                             <i class="feather icon-lock"></i>
                                                         </div>
